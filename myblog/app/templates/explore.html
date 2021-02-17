@@ -10,6 +10,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
+                    <th>(Un)Follow</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,6 +19,9 @@
                             <td>{{ u.first_name }}</td>
                             <td>{{ u.last_name }}</td>
                             <td>{{ u.email }}</td>
+                            <td>
+                                <a href="" class="btn btn-sucess">Follow</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -21,7 +21,7 @@ def profile():
 @main_bp.route('/explore')
 def explore():
     context = {
-        'users': User.query.all()
+        'users': [user for user in User.query.all() if current_user.id != user.id ]
     }
     return render_template('explore.html', **context)
 
