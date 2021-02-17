@@ -13,8 +13,8 @@ def login():
         if user is None:
             return redirect(url_for('login'))
         login_user(user)
-        flash('User successfuly logged in!')
-        return redirect(url_for('home'))
+        flash('User successfuly logged in', 'success')
+        return redirect(url_for('main.home'))
     return render_template('login.html')
 
 @auth_bp.route('/register', methods=['GET', 'Post'])
@@ -30,5 +30,5 @@ def register():
 @auth_bp.route('/logout')
 def logout():
     logout_user()
-    flash('User logged out successfully')
+    flash('User logged out successfully', 'info')
     return redirect(url_for('auth.login'))
