@@ -20,7 +20,11 @@
                             <td>{{ u.last_name }}</td>
                             <td>{{ u.email }}</td>
                             <td>
-                                <a href="" class="btn btn-sucess">Follow</a>
+                                {% if not current_user.is_following(u) %}
+                                    <a href="" class="btn btn-success">Follow</a>
+                                {% else %}
+                                    <a href="" class="btn btn-success">Unfollow</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
