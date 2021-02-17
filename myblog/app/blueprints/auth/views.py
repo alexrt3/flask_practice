@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template
+from flask import request, redirect, url_for, render_template, flash
 from app.blueprints.auth.models import User
 from flask_login import login_user, logout_user
 from app.blueprints.auth import bp as auth_bp
@@ -13,6 +13,7 @@ def login():
         if user is None:
             return redirect(url_for('login'))
         login_user(user)
+        flash('User successfuly logged in!')
         return redirect(url_for('home'))
     return render_template('login.html')
 
@@ -29,4 +30,5 @@ def register():
 @auth_bp.route('/logout')
 def logout():
     logout_user()
+    flash('User logged out successfully')
     return redirect(url_for('auth.login'))
