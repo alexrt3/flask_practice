@@ -1,5 +1,6 @@
 from .import bp as blog_bp
 from flask import request, flash, redirect, url_for
+from .models import Post
 from app import db
 
 @blog_bp.route('/post/create', methods=['POST'])
