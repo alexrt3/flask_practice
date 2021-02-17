@@ -30,10 +30,10 @@
         {% for p in posts %}
             <li class="list-group-item">
                 <h4>
-                    {{ p['title'] }}
+                    {{ p.title }}
                     <span class="float-right">{{ moment(p.date_created).fromNow() }}</span>
                 </h4>
-                <p>{{ p['body'] }}</p>
+                <p>{{ p.body }}</p>
             </li>
         {% endfor %}
     </ul>
