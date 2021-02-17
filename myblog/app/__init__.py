@@ -27,7 +27,7 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp)
 
     from app.blueprints.blog import bp as blog_bp
-    app.register_blueprint(blog_hp)
+    app.register_blueprint(blog_bp)
 
     # Needs app context
     # with app.app_context():

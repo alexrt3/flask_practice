@@ -6,7 +6,6 @@ from app import login_manager
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String)
     body = db.Column(db.Text)
     date_created = db.Column(db.DateTime, nullable=False, default=dt.utcnow)
     date_updated = db.Column(db.DateTime, nullable=True)
