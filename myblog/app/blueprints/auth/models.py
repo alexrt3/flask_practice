@@ -5,13 +5,26 @@ from sqlalchemy.dialects.postgresql import UUID
 import shortuuid 
 
 
+followers = db.Table(
+    'followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+    )
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, default=shortuuid.ShortUUID(alphabet='1234567890').random(length=6), unique=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email = db.Column(db.String)
     password = db.Column(db.String)
-    posts = db.relationship('Post', cascade='all, delete-orphan', backref='post', lazy=True)
+    posts = db.relationship('Post', cascade='all, delete-orphan', backref='user', lazy=True)
+    followed = db.relationship(
+        'User', secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
     
 
     def __init__(self, first_name, last_name, password):
