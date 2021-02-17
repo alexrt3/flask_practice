@@ -37,12 +37,14 @@ class User(UserMixin, db.Model):
     def follow(self, user):
         if not self.is_following(user):
             self.followed.append(user)
+            db.session.commit()
 
-    def unfollow(self):
+    def unfollow(self, user):
         if self.is_following(user):
             self.follow.remove(user)
+            db.session.commit()
 
-    def is_following(self):
+    def is_following(self, user):
         return self.followed.filter(followers.c.followed_id == user.id).count() > 0 
 
     def create_password_hash(self, password):
