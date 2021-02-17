@@ -12,7 +12,7 @@ followers = db.Table(
     )
 
 class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=shortuuid.ShortUUID(alphabet='1234567890').random(length=8), unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email = db.Column(db.String)
