@@ -2,11 +2,11 @@ from app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
-import shortuuid
+import shortuuid 
 
 
 class User(UserMixin, db.Model):
-    id = db.Column(db.Integers, primary_key=True, default=shortuuid.ShortUUID(alphabet='1234567890').random(length=6), unique=True)
+    id = db.Column(db.Integer, primary_key=True, default=shortuuid.ShortUUID(alphabet='1234567890').random(length=6), unique=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email = db.Column(db.String)
