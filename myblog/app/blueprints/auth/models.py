@@ -33,6 +33,17 @@ class User(UserMixin, db.Model):
         self.last_name = last_name
         self.password = password
         self.email = f'{self.first_name}{self.last_name[0]}@nba.com'.lower()
+    
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self):
+        if self.is_following(user):
+            self.follow.remove(user)
+
+    def is_following(self):
+        return self.followed.filter(followers.c.followed_id == user.id).count() > 0 
 
     def create_password_hash(self, password):
         self.password = generate_password_hash(password)
