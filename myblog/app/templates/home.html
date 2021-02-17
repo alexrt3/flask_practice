@@ -10,18 +10,20 @@
         {% endif %}
     </h3>
     <hr>
-        <form>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-11">
-                        <div class="input-group"
-                            <input type="text" name="" id="" class="form-control" placeholder="What's on your mind?" aria-describedby="helpId">
-                        </div>
+        <form class="form-group">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="input-group">
+                        <input type="text" name="" class="form-control" placeholder="What's on your mind?"/>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="input-group">
+                        <input type="submit" name="" class="btn btn-primary" value="Post"/>
                     </div>
                 </div>
             </div>
         </form>
-
     <ul class="list-group">
         {% for p in posts %}
             <li class="list-group-item">
