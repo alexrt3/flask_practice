@@ -1,6 +1,6 @@
 from app import db, create_app
 from app.blueprints.auth.models import User 
-from app.models import Post
+from app.blueprints.blog.models import Post
 
 app = create_app()
 

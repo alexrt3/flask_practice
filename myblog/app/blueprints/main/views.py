@@ -1,7 +1,7 @@
 from app import db
 from flask import render_template, request, redirect, url_for
 from app.blueprints.auth.models import User
-from app.models import Post
+from app.blueprints.blog.models import Post
 from flask_login import login_user, current_user, logout_user
 from .import bp as main_bp
 
