@@ -10,13 +10,18 @@ from .import bp as main_bp
 def home():
     context = {
         'user': current_user,
-        'posts': Post.query.order_by(Post.date_created.desc()).all()
+        # 'posts': Post.query.order_by(Post.date_created.desc()).all()
+        'posts': current_user.followed_posts().all()
     }
     return render_template('home.html', **context)
 
 @main_bp.route('/profile')
+@login_required
 def profile():
-    return render_template('profile.html')
+    context = {
+        'posts': [p for p in Post.query.order_by(Post.date_created).all() if p.user_id == current_user.id]
+    }
+    return render_template('profile.html', **context)
 
 @main_bp.route('/explore')
 @login_required

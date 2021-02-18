@@ -20,6 +20,8 @@ def create_app(config_class=Config):
     moment.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view='auth.login'
+    login_manager.login_message = 'You must be logged in to view this page!'
+    login_manager.login_message_category = 'warning'
 
     from app.blueprints.main import bp as main_bp
     app.register_blueprint(main_bp)

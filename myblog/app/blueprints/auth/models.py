@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 import shortuuid 
+from app.blueprints.blog.models import Post
 
 
 followers = db.Table(
@@ -15,7 +16,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    email = db.Column(db.String)
+    email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     posts = db.relationship('Post', cascade='all, delete-orphan', backref='user', lazy=True)
     followed = db.relationship(
@@ -33,6 +34,15 @@ class User(UserMixin, db.Model):
         self.last_name = last_name
         self.password = password
         self.email = f'{self.first_name}{self.last_name[0]}@nba.com'.lower()
+
+    def followed_posts(self):
+        followed = Post.query.join(
+            followers,
+            (followers.c.followed_id == Post.user_id)
+        ).filter(followers.c.follower_id == self.id)
+        self_posts = Post.query.filter_by(user_id=self.id)
+        all_posts = followed.union(self_posts).order_by(Post.date_created.desc())
+        return all_posts
     
     def follow(self, user):
         if not self.is_following(user):
