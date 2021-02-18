@@ -19,6 +19,7 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     moment.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view='auth.login'
 
     from app.blueprints.main import bp as main_bp
     app.register_blueprint(main_bp)

@@ -1,6 +1,6 @@
 from flask import request, redirect, url_for, render_template, flash
 from app.blueprints.auth.models import User
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from app.blueprints.auth import bp as auth_bp
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -32,3 +32,13 @@ def logout():
     logout_user()
     flash('User logged out successfully', 'info')
     return redirect(url_for('auth.login'))
+
+@auth_bp('/follow')
+def follow():
+    flash('Sucessfully following!')
+    return redirect(url_for('main.explore'))
+    # u = User.query.get(current_user.id)
+    # u.follow
+
+
+    
