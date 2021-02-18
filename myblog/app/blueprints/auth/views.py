@@ -33,12 +33,22 @@ def logout():
     flash('User logged out successfully', 'info')
     return redirect(url_for('auth.login'))
 
-@auth_bp('/follow')
+@auth_bp.route('/follow')
 def follow():
-    flash('Sucessfully following!')
+    user_id = request.args.get('user_id')
+    u = User.query.get(user_id)
+
+    current_user.follow(u)
+    flash(f'Sucessfully following!', 'success')
     return redirect(url_for('main.explore'))
-    # u = User.query.get(current_user.id)
-    # u.follow
+  
 
+auth_bp.route('/unfollow')
+def unfollow():
+    user_email = request.args.get('email')
+    u = User.query.filter_by(email=user_email).first()
 
+    current_user.unfollow(u)
+    flash(f'Sucessfully unfollowed!', 'info')
+    return redirect(url_for('main.explore'))
     

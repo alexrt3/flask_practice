@@ -21,9 +21,9 @@
                             <td>{{ u.email }}</td>
                             <td>
                                 {% if not current_user.is_following(u) %}
-                                    <a href="{{ url_for('follow') }}" class="btn btn-success">Follow</a>
+                                    <a href="{{ url_for('auth.follow', user_id=u.id) }}" class="btn btn-success">Follow</a>
                                 {% else %}
-                                    <a href="" class="btn btn-success">Unfollow</a>
+                                    <a href="{{ url_for('auth.unfollow', email=u.email) }}" class="btn btn-warning">Unfollow</a>
                                 {% endif %}
                             </td>
                         </tr>
